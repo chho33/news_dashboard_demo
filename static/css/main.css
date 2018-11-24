@@ -1,0 +1,28 @@
+#count{
+    width:550px;
+    height:500px;
+    padding:5px;
+    float:left;
+}
+
+#cloud{
+    width:550px;
+    height:500px;
+    padding:5px;
+    float:left;
+}
+
+.input-block{
+    margin-right:10px;
+    float:left;
+    color:white;
+}
+
+.nav-header{
+    margin-left:120px;
+    color:white;
+}
+
+.expand-bottom{
+    margin-bottom:60px;
+}

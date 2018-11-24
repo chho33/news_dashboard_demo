@@ -1,0 +1,36 @@
+{% extends "text/base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row expand-bottom">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="nav-header" style="margin-bottom:5px;">
+        <h1>News This Week</h1>
+        <form action="{% url 'homepage' %}" method="get" accept-charset="utf-8">
+          <div class="input-block">
+            關鍵字：{{query_form.keyword}}
+          </div>
+          <div class="input-daterange input-block">
+            起始日期：{{query_form.fromdt}}
+            結束日期：{{query_form.todt}}
+          </div>
+          <input type="submit" style="color:black;">
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="count">
+      {{count|safe}}
+    </div>
+    <div id="cloud">
+      {{cloud|safe}}
+    </div>
+  </div>
+  <div class="row">
+    {{table|safe}}
+  </div>
+</div>
+
+{% endblock %}
