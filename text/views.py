@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect
 import pandas as pd
 from .models import Content 
 from .plots import count_plot,cloud_plot,table_plot
@@ -17,16 +18,15 @@ class HomePageView(TemplateView):
     template_name = "text/home.html"
 
     def get(self,request,*args,**kwargs):
-        print('request: ',request)
         fromdt = request.GET.get('fromdt',fromdt_default) 
         todt = request.GET.get('todt',todt_default)
         keyword = request.GET.get('keyword',keyword_default)
-        print('fromdt: ',fromdt)
-        print('todt: ',todt)
-        print('keyword: ',keyword)
         data = get_data(keyword,fromdt,todt) 
+        print('data: ',data)
+        print('len data: ',len(data))
         if len(data) == 0:
-            return("404")
+            print("redirect")
+            return HttpResponseRedirect('/notfound')
         df = pd.DataFrame(list(data.values()))
         context = self.get_context_data(df=df)
         return self.render_to_response(context)
@@ -36,5 +36,13 @@ class HomePageView(TemplateView):
         context['count'] = count_plot(kwargs["df"]) 
         context['cloud'] = cloud_plot(kwargs["df"]) 
         context['table'] = table_plot(kwargs["df"]) 
+        context['query_form'] = QueryForm()
+        return context
+
+class NotFoundView(TemplateView):    
+    template_name = "text/notfound.html"
+
+    def get_context_data(self,**kwargs):
+        context = super(NotFoundView, self).get_context_data(**kwargs)
         context['query_form'] = QueryForm()
         return context

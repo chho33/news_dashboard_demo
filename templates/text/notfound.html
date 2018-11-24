@@ -1,0 +1,28 @@
+{% extends "text/base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="nav-header" style="margin-bottom:5px;">
+        <h1>News This Week</h1>
+        <form action="{% url 'homepage' %}" method="get" accept-charset="utf-8">
+          <div class="input-block">
+            關鍵字：{{query_form.keyword}}
+          </div>
+          <div class="input-daterange input-block">
+            起始日期：{{query_form.fromdt}}
+            結束日期：{{query_form.todt}}
+          </div>
+          <input type="submit" style="color:black;">
+        </form>
+      </div>
+      <div style="font-size: 30px; color:white; margin-left:120px">
+        您輸入的關鍵字查無結果，請重新輸入關鍵字。
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
