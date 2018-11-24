@@ -14,7 +14,7 @@ height = 500
 def normalize(counts,max_count=100):
     max_ = max(counts) 
     min_ = min(counts)
-    counts = [int((c-min_)/(max_-min_)*max_count)+1 for c in counts] 
+    counts = [int(((c-min_)/(max_-min_+1))*max_count)+1 for c in counts] 
     return counts
 
 def line_break(text,span=100):

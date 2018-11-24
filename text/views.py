@@ -22,13 +22,11 @@ class HomePageView(TemplateView):
         todt = request.GET.get('todt',todt_default)
         keyword = request.GET.get('keyword',keyword_default)
         data = get_data(keyword,fromdt,todt) 
-        print('data: ',data)
-        print('len data: ',len(data))
         if len(data) == 0:
             print("redirect")
             return HttpResponseRedirect('/notfound')
         df = pd.DataFrame(list(data.values()))
-        context = self.get_context_data(df=df)
+        context = self.get_context_data(df=df,keyword=keyword,fromdt=fromdt,todt=todt)
         return self.render_to_response(context)
 
     def get_context_data(self,**kwargs):
@@ -36,7 +34,10 @@ class HomePageView(TemplateView):
         context['count'] = count_plot(kwargs["df"]) 
         context['cloud'] = cloud_plot(kwargs["df"]) 
         context['table'] = table_plot(kwargs["df"]) 
-        context['query_form'] = QueryForm()
+        context['keyword'] = kwargs['keyword'] 
+        context['fromdt'] = kwargs['fromdt'] 
+        context['todt'] = kwargs['todt'] 
+        context['query_form'] = QueryForm(keyword=kwargs['keyword'],fromdt=kwargs['fromdt'],todt=kwargs['todt'])
         return context
 
 class NotFoundView(TemplateView):    

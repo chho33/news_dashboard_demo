@@ -2,24 +2,23 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="row expand-bottom">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="nav-header" style="margin-bottom:5px;">
-        <h1>News This Week</h1>
-        <form action="{% url 'homepage' %}" method="get" accept-charset="utf-8">
-          <div class="input-block">
-            關鍵字：{{query_form.keyword}}
-          </div>
-          <div class="input-daterange input-block">
-            起始日期：{{query_form.fromdt}}
-            結束日期：{{query_form.todt}}
-          </div>
-          <input type="submit" style="color:black;">
-        </form>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="nav-header">
+    <h1>News This Week</h1>
+    <form action="{% url 'homepage' %}" method="get" accept-charset="utf-8">
+      <div class="input-block">
+        關鍵字：{{query_form.keyword}}
       </div>
-    </div>
+      <div class="input-daterange input-block">
+        起始日期：{{query_form.fromdt}}
+        結束日期：{{query_form.todt}}
+      </div>
+      <input type="submit" style="color:black;">
+      <div style="clear:both;"></div>
+    </form>
   </div>
+</div>
+<div class="container" style="margin-top:100px">
   <div class="row">
     <div id="count">
       {{count|safe}}
@@ -27,6 +26,7 @@
     <div id="cloud">
       {{cloud|safe}}
     </div>
+    <div style="clear:both;"></div>
   </div>
   <div class="row">
     {{table|safe}}
