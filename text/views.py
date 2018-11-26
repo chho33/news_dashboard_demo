@@ -45,5 +45,5 @@ class NotFoundView(TemplateView):
 
     def get_context_data(self,**kwargs):
         context = super(NotFoundView, self).get_context_data(**kwargs)
-        context['query_form'] = QueryForm()
+        context['query_form'] = QueryForm(keyword=kwargs['keyword'],fromdt=kwargs['fromdt'],todt=kwargs['todt'])
         return context
