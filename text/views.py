@@ -43,6 +43,12 @@ class HomePageView(TemplateView):
 class NotFoundView(TemplateView):    
     template_name = "text/notfound.html"
 
+    def get(self,request,*args,**kwargs):
+        fromdt = request.GET.get('fromdt',fromdt_default) 
+        todt = request.GET.get('todt',todt_default)
+        keyword = request.GET.get('keyword',keyword_default)
+        context = self.get_context_data(keyword=keyword,fromdt=fromdt,todt=todt)
+        return self.render_to_response(context)
     def get_context_data(self,**kwargs):
         context = super(NotFoundView, self).get_context_data(**kwargs)
         context['query_form'] = QueryForm(keyword=kwargs['keyword'],fromdt=kwargs['fromdt'],todt=kwargs['todt'])
