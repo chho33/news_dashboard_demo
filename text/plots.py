@@ -10,6 +10,7 @@ from functools import reduce
 
 width = 1200
 height = 500
+config = {'displayModeBar': False}
 
 def normalize(counts,max_count=100):
     max_ = max(counts) 
@@ -46,10 +47,10 @@ def table_plot(df):
                   df.author.apply(lambda x: line_break(x,span=4))],
           fill = dict(color='#F5F8FF'),
           align = 'left',
-          height = 30
+          height = 30,
         )
     )
-    return plot([table], output_type='div',include_plotlyjs=False)
+    return plot([table], output_type='div',include_plotlyjs=False,config=config)
 
 def create_wordcount(df,xaxis='x1',yaxis='y1'):
     df = df.assign(day=df.date.apply(lambda x:x.date()))
@@ -87,7 +88,7 @@ def count_plot(df):
     layout = go.Layout(
         width=width/2,
         height=height,
-        #margin = dict(t=100),
+        margin = dict(t=80,b=10,r=45),
         #autosize=False,
         #xaxis1=dict(
         #    domain=[0, 0.5],
@@ -97,7 +98,7 @@ def count_plot(df):
         #),
     )
     fig = go.Figure(data=[wcount], layout=layout)
-    return  plot(fig,output_type='div',include_plotlyjs=False) 
+    return  plot(fig,output_type='div',include_plotlyjs=False,config=config) 
 
 def cloud_plot(df):
     wcloud = create_wordcloud(df)
@@ -115,10 +116,11 @@ def cloud_plot(df):
             zeroline=False
         ),
         width=width/2,
-        height=height
+        height=height,
+        margin = dict(t=80,b=40,l=45),
     )
     fig = go.Figure(data=[wcloud], layout=layout)
-    return  plot(fig,output_type='div',include_plotlyjs=False) 
+    return  plot(fig,output_type='div',include_plotlyjs=False,config=config) 
 
 def table_plot1(df):
     colorscale = [[0, '#4d004c'],[.5, '#f2e5ff'],[1, '#ffffff']]

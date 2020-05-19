@@ -1,3 +1,4 @@
+Django==3
 jieba
 pandas
 plotly
