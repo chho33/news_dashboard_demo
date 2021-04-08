@@ -1,4 +1,4 @@
-Django==3
+Django==3.0.14
 jieba
 pandas
 plotly
